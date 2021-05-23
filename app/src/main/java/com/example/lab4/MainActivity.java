@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     MySQLite db = new MySQLite(this);
     private ArrayList<String> target;
     private SimpleCursorAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 intencja.putExtra("element",zwierz);
                 startActivityForResult(intencja, 2);
             }
+        });
+
+                listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        TextView delId = (TextView) view.findViewById(android.R.id.text1);
+                        db.usun(delId.getText().toString());
+                        adapter.changeCursor(db.lista());
+                        adapter.notifyDataSetChanged();
+                        return true;
+                    }
+
+
         });
     }
 
