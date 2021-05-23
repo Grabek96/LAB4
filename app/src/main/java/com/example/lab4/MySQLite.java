@@ -9,7 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLite extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    public MySQLite(Context context){super(context, "animalsDB",null, DATABASE_VERSION);}
+    public MySQLite(Context context){
+        super(context, "animalsDBB",null, DATABASE_VERSION);}
 
     @Override
     public void onCreate(SQLiteDatabase database) {
@@ -17,6 +18,7 @@ public class MySQLite extends SQLiteOpenHelper {
                 " create table animals " +
                         "(_id integer primary key autoincrement," +
                         "gatunek text not null," +
+                        "kolor text not null," +
                         "wielkosc real not null," +
                         "opis text not null);";
                     database.execSQL(DATABASE_CREATE);
